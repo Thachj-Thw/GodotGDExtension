@@ -1,0 +1,22 @@
+{
+    "files.associations": {
+        "string": "cpp",
+        "format": "cpp",
+        "functional": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "initializer_list": "cpp",
+        "list": "cpp",
+        "queue": "cpp",
+        "ranges": "cpp",
+        "span": "cpp",
+        "utility": "cpp",
+        "vector": "cpp",
+        "xhash": "cpp",
+        "xstring": "cpp",
+        "xtree": "cpp",
+        "xutility": "cpp",
+        "chrono": "cpp",
+        "xiosbase": "cpp"
+    }
+}

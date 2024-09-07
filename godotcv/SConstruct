@@ -1,0 +1,43 @@
+#!/usr/bin/env python
+import os
+import sys
+
+env = SConscript("../godot-cpp/SConstruct")
+
+# For reference:
+# - CCFLAGS are compilation flags shared between C and C++
+# - CFLAGS are for C-specific compilation flags
+# - CXXFLAGS are for C++-specific compilation flags
+# - CPPFLAGS are for pre-processor flags
+# - CPPDEFINES are for pre-processor defines
+# - LINKFLAGS are for linking flags
+
+# tweak this if you want to use different folders, or more folders, to store your source code in.
+opencv_build = os.path.normpath("D:/cpp/libs/opencv/build")
+opencv_lib = os.path.join(opencv_build, "x64", "vc16", "lib")
+opencv_bin = os.path.join(opencv_build, "x64", "vc16", "bin")
+opencv_include = os.path.join(opencv_build, "include")
+
+env.Append(CPPPATH=[opencv_include])
+env.Append(LIBPATH=[opencv_lib, opencv_bin])
+env.Append(LIBS=["opencv_world4100", "opencv_world4100d"])
+env.Install("src", r"D:\cpp\libs\opencv\build\x64\vc16\bin\opencv_world4100.dll")
+env.Alias('install', 'src')
+
+env.Append(CPPPATH=["src/"])
+sources = Glob("src/*.cpp")
+
+if env["platform"] == "macos":
+    library = env.SharedLibrary(
+        "bin/godotcv.{}.{}.framework/godotcv.{}.{}".format(
+            env["platform"], env["target"], env["platform"], env["target"]
+        ),
+        source=sources,
+    )
+else:
+    library = env.SharedLibrary(
+        "bin/godotcv{}{}".format(env["suffix"], env["SHLIBSUFFIX"]),
+        source=sources,
+    )
+
+Default(library)

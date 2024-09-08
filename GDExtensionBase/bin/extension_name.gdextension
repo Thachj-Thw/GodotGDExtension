@@ -2,21 +2,50 @@
 
 entry_symbol = "godot_extension_name_init"
 compatibility_minimum = "4.2"
+reloadable = true
+android_aar_plugin = false
+
+[icons]
+ExtensionName = "res://icons/extension_icon.svg"
 
 [libraries]
 
+macos.debug = "res://bin/extension_name.macos.template_debug.framework"
+macos.release = "res://bin/extension_name.macos.template_release.framework"
 windows.debug.x86_32 = "res://bin/extension_name.windows.template_debug.x86_32.dll"
 windows.release.x86_32 = "res://bin/extension_name.windows.template_release.x86_32.dll"
 windows.debug.x86_64 = "res://bin/extension_name.windows.template_debug.x86_64.dll"
 windows.release.x86_64 = "res://bin/extension_name.windows.template_release.x86_64.dll"
+linux.debug.x86_64 = "res://bin/extension_name.linux.template_debug.x86_64.so"
+linux.release.x86_64 = "res://bin/extension_name.linux.template_release.x86_64.so"
+linux.debug.arm64 = "res://bin/extension_name.linux.template_debug.arm64.so"
+linux.release.arm64 = "res://bin/extension_name.linux.template_release.arm64.so"
+linux.debug.rv64 = "res://bin/extension_name.linux.template_debug.rv64.so"
+linux.release.rv64 = "res://bin/extension_name.linux.template_release.rv64.so"
 
 [dependencies]
 
+macos.debug = {
+    "res://bin/libdependency.macos.template_debug.framework" : "Contents/Frameworks"
+}
+macos.release = {
+    "res://bin/libdependency.macos.template_release.framework" : "Contents/Frameworks"
+}
 windows.debug = {
-    "res://bin/library.dll": "",
-    "res://bin/libraryd.dll": ""
+    "res://bin/libdependency.windows.template_debug.x86_64.dll" : "",
+    "res://bin/libdependency.windows.template_debug.x86_32.dll" : ""
 }
 windows.release = {
-    "res://bin/library.dll": "",
-    "res://bin/libraryd.dll": ""
+    "res://bin/libdependency.windows.template_release.x86_64.dll" : "",
+    "res://bin/libdependency.windows.template_release.x86_32.dll" : ""
+}
+linux.debug = {
+    "res://bin/libdependency.linux.template_debug.x86_64.so" : "",
+    "res://bin/libdependency.linux.template_debug.arm64.so" : "",
+    "res://bin/libdependency.linux.template_debug.rv64.so" : ""
+}
+linux.release = {
+    "res://bin/libdependency.linux.template_release.x86_64.so" : "",
+    "res://bin/libdependency.linux.template_release.arm64.so" : "",
+    "res://bin/libdependency.linux.template_release.rv64.so" : ""
 }

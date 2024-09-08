@@ -15,14 +15,10 @@ env = SConscript("../godot-cpp/SConstruct")
 # tweak this if you want to use different folders, or more folders, to store your source code in.
 opencv_build = os.path.normpath("D:/cpp/libs/opencv/build")
 opencv_lib = os.path.join(opencv_build, "x64", "vc16", "lib")
-opencv_bin = os.path.join(opencv_build, "x64", "vc16", "bin")
 opencv_include = os.path.join(opencv_build, "include")
 
 env.Append(CPPPATH=[opencv_include])
-env.Append(LIBPATH=[opencv_lib, opencv_bin])
-env.Append(LIBS=["opencv_world4100", "opencv_world4100d"])
-env.Install("src", r"D:\cpp\libs\opencv\build\x64\vc16\bin\opencv_world4100.dll")
-env.Alias('install', 'src')
+env.Append(LINKFLAGS=[Glob(os.path.join(opencv_lib, "*.lib"))])
 
 env.Append(CPPPATH=["src/"])
 sources = Glob("src/*.cpp")

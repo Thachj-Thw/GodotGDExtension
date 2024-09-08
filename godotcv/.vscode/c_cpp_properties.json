@@ -5,9 +5,9 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "D:\\cpp\\libs\\opencv\\build\\include",
-                "D:\\godot\\extension\\godot-cpp\\gen\\include",
-                "D:\\godot\\extension\\godot-cpp\\include",
-                "D:\\godot\\extension\\godot-cpp\\gdextension"
+                "${workspaceFolder}/../godot-cpp/gen/include",
+                "${workspaceFolder}/../godot-cpp/include",
+                "${workspaceFolder}/../godot-cpp/gdextension"
             ],
             "defines": [
                 "_DEBUG",

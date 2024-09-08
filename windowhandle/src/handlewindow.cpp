@@ -14,6 +14,7 @@ void HandleWindow::_bind_methods()
 	ClassDB::bind_method(D_METHOD("screenshot"), &HandleWindow::screenshot);
     ClassDB::bind_method(D_METHOD("set_crop", "is_crop"), &HandleWindow::set_crop);
     ClassDB::bind_method(D_METHOD("get_crop"), &HandleWindow::get_crop);
+    ClassDB::bind_method(D_METHOD("HWND_valid"), &HandleWindow::HWND_valid);
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "hwnd"), "set_hwnd", "get_hwnd");
 	ADD_PROPERTY(PropertyInfo(Variant::RECT2I, "crop"), "set_crop", "get_crop");
 }
@@ -129,7 +130,7 @@ Ref<Image> HandleWindow::screenshot()
     int32_t out_height = height;
     
     dwBmpSize = width * height * 4;
-    if (crop.size != Vector2i(0, 0))
+    if (crop.size.x > 0 && crop.size.y > 0)
     {
         BYTE * buffer = new BYTE[dwBmpSize];
         GetDIBits(hdcScreen, hbmScreen, 0, (UINT)height, buffer, (BITMAPINFO*)&bi, DIB_RGB_COLORS);
@@ -151,8 +152,18 @@ done:
 
     Ref<Image> img;
     img.instantiate();
-    convert_BGRA2RGBA_without_alpha(bytes.ptrw(), bytes.size());
-    return img->create_from_data(out_width, out_height, false, Image::FORMAT_RGBA8, bytes);
+    if (bytes.size() > 0)
+    {
+        convert_BGRA2RGBA_without_alpha(bytes.ptrw(), bytes.size());
+        return img->create_from_data(out_width, out_height, false, Image::FORMAT_RGBA8, bytes);
+    }
+    return img;
+}
+
+
+bool HandleWindow::HWND_valid()
+{
+    return GetDC(hwnd) != NULL;
 }
 
 void HandleWindow::set_hwnd(int new_hwnd)

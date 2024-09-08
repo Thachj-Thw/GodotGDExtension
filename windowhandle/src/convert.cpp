@@ -40,7 +40,7 @@ void crop_buffer(uint8_t * buffer, int64_t width, int64_t startX, int64_t startY
     int64_t i = 0;
     int64_t x = startY;
     width *= 4;
-    for (int64_t row = startY; row <= endY; row++)
+    for (int64_t row = startY; row < endY; row++)
     {
         for (int64_t col = startX * 4; col < endX * 4; col++)
         {

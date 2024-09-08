@@ -31,6 +31,8 @@ namespace godot {
 
 		HandleWindow();
 		~HandleWindow();
+
+		bool HWND_valid();
         Ref<Image> screenshot();
 
 		int get_hwnd();

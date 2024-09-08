@@ -1,0 +1,22 @@
+[configuration]
+
+entry_symbol = "godot_extension_name_init"
+compatibility_minimum = "4.2"
+
+[libraries]
+
+windows.debug.x86_32 = "res://bin/extension_name.windows.template_debug.x86_32.dll"
+windows.release.x86_32 = "res://bin/extension_name.windows.template_release.x86_32.dll"
+windows.debug.x86_64 = "res://bin/extension_name.windows.template_debug.x86_64.dll"
+windows.release.x86_64 = "res://bin/extension_name.windows.template_release.x86_64.dll"
+
+[dependencies]
+
+windows.debug = {
+    "res://bin/library.dll": "",
+    "res://bin/libraryd.dll": ""
+}
+windows.release = {
+    "res://bin/library.dll": "",
+    "res://bin/libraryd.dll": ""
+}
